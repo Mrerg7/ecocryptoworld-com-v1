@@ -1,0 +1,35 @@
+{
+  "disclaimer": "This website is for demonstration and informational purposes only. It does not constitute an offer of services, a commitment to deploy, or a guarantee of outcomes. All statistics, projections, and references to specific technologies are based on publicly available information as of the date shown and are subject to change.",
+  "trustPoints": [
+    "Timely & Mission-Driven",
+    "ReFi & Climate Narrative",
+    "Broad Platform Potential",
+    "Premium .com Authority"
+  ],
+  "useCaseCategories": [
+    {
+      "title": "ReFi / Regenerative Finance Platform",
+      "description": "The perfect home for protocols that regenerate ecosystems while generating returns. Instant alignment with the entire ReFi movement."
+    },
+    {
+      "title": "Carbon Credit & Biodiversity Marketplace",
+      "description": "Own the name that feels like the global hub for transparent, on-chain environmental markets and nature-based solutions."
+    },
+    {
+      "title": "Green Energy & Renewable Finance",
+      "description": "Ideal for platforms tokenizing renewable energy, financing solar/wind projects, or building decentralized green grids."
+    },
+    {
+      "title": "Regenerative Agriculture & Food Systems",
+      "description": "Perfect for on-chain platforms connecting sustainable farming, soil regeneration, and transparent food supply chains."
+    },
+    {
+      "title": "Climate DAO or Environmental Governance",
+      "description": "Strong positioning for decentralized organizations focused on climate action, conservation funding, and planetary governance."
+    },
+    {
+      "title": "Sustainable Crypto Exchange or Wallet",
+      "description": "Differentiate your platform by making sustainability a core feature. Attract the rapidly growing segment of impact-conscious crypto users."
+    }
+  ]
+}

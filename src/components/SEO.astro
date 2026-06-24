@@ -1,0 +1,155 @@
+---
+import { SITE } from '../consts';
+
+interface Props {
+  title?: string;
+  description?: string;
+  path?: string;
+}
+
+const {
+  title = SITE.title,
+  description = SITE.description,
+  path = '/',
+} = Astro.props;
+
+const canonical = new URL(path, SITE.url).href;
+
+const OG_IMAGE = 'https://imagedelivery.net/-sPAUAWeA405NiWJ0SNIQA/d7753631-936b-4121-4c3f-fa95f9393600/public';
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: SITE.name,
+    url: SITE.url,
+    description,
+    inLanguage: 'en-US',
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Product',
+    name: `${SITE.name} — Premium Domain Name`,
+    description,
+    url: SITE.url,
+    category: 'Domain Name',
+    brand: {
+      '@type': 'Brand',
+      name: SITE.name,
+    },
+    offers: {
+      '@type': 'Offer',
+      url: SITE.url,
+      price: '27500.00',
+      priceCurrency: 'USD',
+      availability: 'https://schema.org/InStock',
+      priceValidUntil: '2027-12-31',
+      seller: {
+        '@type': 'Organization',
+        name: 'Desert Rich',
+        email: SITE.acquisitionEmail,
+      },
+      hasMerchantReturnPolicy: {
+        '@type': 'MerchantReturnPolicy',
+        returnPolicyCategory: 'https://schema.org/MerchantReturnNotPermitted',
+        returnMethod: 'https://schema.org/ReturnByMail',
+        applicableCountry: 'US',
+        merchantReturnDays: 0,
+      },
+      shippingDetails: {
+        '@type': 'OfferShippingDetails',
+        shippingRate: {
+          '@type': 'MonetaryAmount',
+          value: 0,
+          currency: 'USD',
+        },
+        deliveryTime: {
+          '@type': 'ShippingDeliveryTime',
+          handlingTime: {
+            '@type': 'QuantitativeValue',
+            minValue: 1,
+            maxValue: 3,
+            unitCode: 'd',
+          },
+          transitTime: {
+            '@type': 'QuantitativeValue',
+            minValue: 0,
+            maxValue: 0,
+            unitCode: 'd',
+          },
+        },
+        shippingDestination: {
+          '@type': 'DefinedRegion',
+          addressCountry: 'US',
+        },
+      },
+    },
+    aggregateRating: {
+      '@type': 'AggregateRating',
+      ratingValue: 5,
+      bestRating: 5,
+      reviewCount: 1,
+    },
+    review: {
+      '@type': 'Review',
+      author: {
+        '@type': 'Organization',
+        name: SITE.name,
+      },
+      reviewBody:
+        'Premium domain at the convergence of cryptocurrency, sustainability, and regenerative finance — the definitive brand for the Eco Crypto World movement.',
+    },
+    image: OG_IMAGE,
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: SITE.name,
+    url: SITE.url,
+    logo: OG_IMAGE,
+    contactPoint: {
+      '@type': 'ContactPoint',
+      contactType: 'sales',
+      email: SITE.acquisitionEmail,
+      availableLanguage: 'English',
+    },
+  },
+];
+---
+
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="canonical" href={canonical} />
+<title>{title}</title>
+<meta name="description" content={description} />
+<meta name="robots" content="index, follow" />
+<meta name="theme-color" content="#09090b" />
+<meta name="google-site-verification" content="KwIQtgk9y2_BjmaP_JHJN24yGb47RofAOnF2UvMZsW0" />
+
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content={SITE.name} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonical} />
+<meta property="og:locale" content={SITE.locale} />
+<meta property="og:image" content={OG_IMAGE} />
+<meta property="og:image:secure_url" content={OG_IMAGE} />
+<meta property="og:image:alt" content={`${SITE.name} — Premium domain for the Eco Crypto World movement`} />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={OG_IMAGE} />
+<meta name="twitter:image:alt" content={`${SITE.name} — Premium domain for the Eco Crypto World movement`} />
+
+<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+  crossorigin="anonymous"
+  referrerpolicy="no-referrer"
+/>
+
+<script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd)} />

@@ -1,0 +1,91 @@
+---
+import { ACQUISITION_MAILTO } from '../consts';
+---
+
+<nav id="nav" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b border-zinc-800">
+  <div class="max-w-screen-xl mx-auto">
+    <div class="px-6 py-5 flex items-center justify-between">
+      <!-- Logo -->
+      <a href="/" class="flex items-center gap-x-3 no-underline">
+        <div class="w-9 h-9 eco-glow rounded-xl flex items-center justify-center shadow-inner">
+          <i class="fa-solid fa-leaf text-zinc-950 text-lg"></i>
+        </div>
+        <div>
+          <span class="font-display text-2xl font-semibold tracking-tighter text-white">Ecocryptoworld</span>
+          <span class="text-xs font-mono text-zinc-500 align-super ml-0.5">.COM</span>
+        </div>
+      </a>
+
+      <!-- Desktop Nav -->
+      <div class="hidden md:flex items-center gap-x-9 text-sm font-medium">
+        <a href="#meaning" class="nav-link text-zinc-300 hover:text-emerald-400 no-underline">The Name</a>
+        <a href="#opportunity" class="nav-link text-zinc-300 hover:text-emerald-400 no-underline">The Opportunity</a>
+        <a href="#why-premium" class="nav-link text-zinc-300 hover:text-emerald-400 no-underline">Why Premium</a>
+        <a href="#acquire" class="nav-link text-zinc-300 hover:text-emerald-400 no-underline">Acquire</a>
+      </div>
+
+      <!-- CTA Buttons -->
+      <div class="flex items-center gap-x-3">
+        <a href="#acquire"
+           class="hidden sm:inline-block px-5 py-2.5 text-sm font-semibold rounded-3xl border border-zinc-700 hover:bg-zinc-900 transition-colors text-zinc-300 no-underline">
+          Inquire Now
+        </a>
+        <a href={ACQUISITION_MAILTO}
+           class="px-6 py-2.5 eco-glow hover:brightness-110 active:brightness-95 transition-all text-zinc-950 text-sm font-semibold rounded-3xl flex items-center gap-x-2 shadow-lg shadow-emerald-500/20 no-underline">
+          <span>Acquire Domain</span>
+          <i class="fa-solid fa-arrow-right text-xs"></i>
+        </a>
+
+        <!-- Mobile Menu Button -->
+        <button id="mobile-menu-btn" class="md:hidden w-10 h-10 flex items-center justify-center text-zinc-400 hover:text-white bg-transparent border-0 cursor-pointer" aria-label="Menu">
+          <i class="fa-solid fa-bars text-xl"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<script>
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 30) {
+      nav.classList.add('nav-scrolled', 'shadow-xl');
+    } else {
+      nav.classList.remove('nav-scrolled', 'shadow-xl');
+    }
+  });
+
+  const mobileBtn = document.getElementById('mobile-menu-btn');
+  if (mobileBtn) {
+    mobileBtn.addEventListener('click', () => {
+      const navLinks = document.createElement('div');
+      navLinks.className = 'fixed inset-0 bg-zinc-950/95 z-[90] flex flex-col p-8 pt-20 text-xl';
+      navLinks.innerHTML = `
+        <button class="absolute top-6 right-8 text-3xl text-zinc-400 bg-transparent border-0 cursor-pointer">&times;</button>
+        <a href="#meaning" class="py-4 border-b border-zinc-800 text-zinc-200 no-underline">The Name</a>
+        <a href="#opportunity" class="py-4 border-b border-zinc-800 text-zinc-200 no-underline">The Opportunity</a>
+        <a href="#why-premium" class="py-4 border-b border-zinc-800 text-zinc-200 no-underline">Why Premium</a>
+        <a href="#acquire" class="py-4 border-b border-zinc-800 text-zinc-200 no-underline">Acquire</a>
+        <div class="pt-8">
+          <a href="${document.querySelector('a[href^="mailto:"]')?.getAttribute('href') || '#'}"
+             class="block w-full py-4 eco-glow text-zinc-950 rounded-3xl font-semibold text-center no-underline">
+            Acquire Domain
+          </a>
+        </div>
+      `;
+      document.body.appendChild(navLinks);
+
+      navLinks.querySelector('button')!.addEventListener('click', () => {
+        document.body.removeChild(navLinks);
+      });
+
+      navLinks.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+          setTimeout(() => {
+            if (document.body.contains(navLinks)) document.body.removeChild(navLinks);
+          }, 300);
+        });
+      });
+    });
+  }
+</script>
