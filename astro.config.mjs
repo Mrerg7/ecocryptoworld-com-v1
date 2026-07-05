@@ -3,7 +3,7 @@ import tailwind from '@astrojs/tailwind';
 import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
-  site: 'https://ecocryptoworld.com',
+  site: 'https://ecocryptoworld.com/',
   output: 'static',
   trailingSlash: 'always',
   integrations: [

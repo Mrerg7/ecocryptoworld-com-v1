@@ -1,5 +1,9 @@
 name = "ecocryptoworld-com"
+main = "src/index.ts"
 compatibility_date = "2026-06-01"
 
 [assets]
 directory = "./dist"
+binding = "ASSETS"
+html_handling = "force-trailing-slash"
+run_worker_first = true
