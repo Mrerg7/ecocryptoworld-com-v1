@@ -21,8 +21,8 @@ const reasons = (await getCollection('reasons')).sort(
   <main>
     <!-- HERO -->
     <header class="hero-bg min-h-[100dvh] flex items-center pt-16 relative">
-      <div class="max-w-screen-xl mx-auto px-6 pt-12 pb-20">
-        <div class="max-w-5xl">
+      <div class="max-w-screen-xl mx-auto px-6 pt-12 pb-20 w-full">
+        <div class="max-w-5xl lg:max-w-2xl">
           <!-- Badge -->
           <div class="inline-flex items-center gap-x-2 px-4 py-1.5 rounded-3xl bg-white/10 backdrop-blur-md border border-white/20 mb-8">
             <div class="flex items-center gap-x-1.5">
@@ -32,7 +32,7 @@ const reasons = (await getCollection('reasons')).sort(
           </div>
 
           <div class="max-w-4xl">
-            <h1 class="font-display text-[4rem] md:text-[5.5rem] leading-[0.95] tracking-[-4px] font-extrabold mb-2">
+            <h1 class="font-display text-[2.75rem] sm:text-[4rem] md:text-[5.5rem] leading-[0.95] tracking-[-1.5px] sm:tracking-[-3px] md:tracking-[-4px] font-extrabold mb-2">
               Own the Brand<br />of the<br />
               <span class="eco-gradient">Eco Crypto World</span>
             </h1>
@@ -344,7 +344,7 @@ const reasons = (await getCollection('reasons')).sort(
           <div class="inline-flex items-center justify-center w-16 h-16 rounded-3xl bg-gradient-to-br from-emerald-500 to-emerald-600 mb-6 shadow-inner">
             <i class="fa-solid fa-globe text-zinc-950 text-3xl"></i>
           </div>
-          <h3 class="font-display text-5xl tracking-[-2px] font-extrabold mb-4">Wealth that<br />heals the planet.</h3>
+          <h3 class="font-display text-4xl sm:text-5xl tracking-[-1.5px] sm:tracking-[-2px] font-extrabold mb-4">Wealth that<br />heals the planet.</h3>
           <p class="text-xl text-zinc-300 mb-8">Ecocryptoworld.com is available for private acquisition by ambitious teams building the future of regenerative finance and sustainable blockchain.</p>
 
           <AcquisitionCTA label="Contact to Acquire" variant="accent" icon="fa-envelope" />

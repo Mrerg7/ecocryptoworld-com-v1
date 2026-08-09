@@ -28,7 +28,7 @@
   }
 
   .section-header {
-    @apply text-[3.25rem] leading-[1.05] font-bold tracking-[-0.04em];
+    @apply text-[2.25rem] sm:text-[2.75rem] md:text-[3.25rem] leading-[1.05] font-bold tracking-[-0.03em] sm:tracking-[-0.04em];
   }
 
   .eco-gradient {
@@ -59,7 +59,14 @@
     background-image: linear-gradient(rgba(9, 9, 11, 0.70), rgba(9, 9, 11, 0.90)), url('https://imagedelivery.net/-sPAUAWeA405NiWJ0SNIQA/d7753631-936b-4121-4c3f-fa95f9393600/public');
     background-size: cover;
     background-position: center;
-    background-attachment: fixed;
+    /* fixed backgrounds break mobile Safari layout / paint — keep scroll on small screens */
+    background-attachment: scroll;
+  }
+
+  @media (min-width: 1024px) {
+    .hero-bg {
+      background-attachment: fixed;
+    }
   }
 
   .reason-card {

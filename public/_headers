@@ -7,13 +7,14 @@
   Link: <https://ecocryptoworld.com/>; rel="canonical"
 
 /index.html
-  X-Robots-Tag: noindex
+  X-Robots-Tag: noindex, nofollow
+  Link: <https://ecocryptoworld.com/>; rel="canonical"
 
 /404.html
-  X-Robots-Tag: noindex
+  X-Robots-Tag: noindex, nofollow
 
 /404/
-  X-Robots-Tag: noindex
+  X-Robots-Tag: noindex, nofollow
 
 /sitemap-index.xml
   Content-Type: application/xml

@@ -1,6 +1,7 @@
 User-agent: *
 Allow: /
 Disallow: /404.html
+Disallow: /404/
 Disallow: /index.html
 
 Sitemap: https://ecocryptoworld.com/sitemap-index.xml
