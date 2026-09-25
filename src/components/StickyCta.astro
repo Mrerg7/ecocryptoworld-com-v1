@@ -1,0 +1,73 @@
+---
+import { DOMAIN_PRICE } from '../consts';
+---
+
+<div
+  id="sticky-cta"
+  class="fixed inset-x-0 bottom-0 z-40 lg:hidden translate-y-full transition-transform duration-300 ease-out"
+  inert
+>
+  <div
+    class="border-t border-emerald-500/30 bg-zinc-950/95 backdrop-blur-md px-4 py-3 shadow-[0_-12px_40px_rgba(0,0,0,0.5)]"
+    style="padding-bottom: max(0.75rem, env(safe-area-inset-bottom));"
+  >
+    <div class="flex items-center gap-x-4">
+      <div class="min-w-0">
+        <div class="text-xs uppercase tracking-[1.5px] text-zinc-400">Listed at</div>
+        <div class="text-emerald-400 font-semibold tabular-nums text-lg leading-tight">
+          {DOMAIN_PRICE.display}<span class="text-zinc-400 text-xs font-normal"> USD</span>
+        </div>
+      </div>
+      <a
+        href="#offer"
+        class="ml-auto shrink-0 inline-flex items-center justify-center gap-x-2 rounded-3xl eco-glow text-zinc-950 font-semibold px-6 py-3.5 text-base shadow-lg shadow-emerald-500/20 active:brightness-95 transition-all no-underline"
+      >
+        Make an offer
+      </a>
+    </div>
+  </div>
+</div>
+
+<script>
+  const bar = document.getElementById('sticky-cta');
+  const hero = document.querySelector('header');
+  const hideZones = [
+    document.getElementById('offer'),
+    document.querySelector('footer#acquire'),
+  ].filter(Boolean) as Element[];
+
+  if (bar && hero && 'IntersectionObserver' in window) {
+    let pastHero = false;
+    let overHideZone = false;
+
+    const sync = () => {
+      const show = pastHero && !overHideZone;
+      bar.classList.toggle('translate-y-full', !show);
+      bar.toggleAttribute('inert', !show);
+    };
+
+    new IntersectionObserver(
+      ([entry]) => {
+        pastHero = !entry.isIntersecting && entry.boundingClientRect.top < 0;
+        sync();
+      },
+      { threshold: 0 },
+    ).observe(hero);
+
+    let hiddenHits = 0;
+    const zoneObserver = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          hiddenHits += entry.isIntersecting ? 1 : -1;
+        }
+        hiddenHits = Math.max(hiddenHits, 0);
+        overHideZone = hiddenHits > 0;
+        sync();
+      },
+      { threshold: 0 },
+    );
+    hideZones.forEach((zone) => zoneObserver.observe(zone));
+
+    sync();
+  }
+</script>

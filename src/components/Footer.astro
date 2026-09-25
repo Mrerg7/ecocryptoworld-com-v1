@@ -1,6 +1,7 @@
 ---
-import { ACQUISITION_MAILTO, SITE } from '../consts';
+import { ACQUISITION_MAILTO, DOMAIN_PRICE, SITE } from '../consts';
 import AcquisitionCTA from './AcquisitionCTA.astro';
+import Icon from './Icon.astro';
 
 interface Props {
   disclaimer: string;
@@ -11,9 +12,11 @@ const year = new Date().getFullYear();
 ---
 
 <footer id="acquire" class="border-t border-white/10 bg-zinc-950">
-  <div class="mx-auto max-w-screen-xl px-6 py-20">
+  <div class="mx-auto max-w-screen-xl px-6 py-16 md:py-20">
     <!-- Sophisticated CTA Card -->
-    <div class="relative overflow-hidden rounded-[2rem] border border-emerald-500/25 bg-gradient-to-br from-zinc-950 via-emerald-950/20 to-black p-10 md:p-14">
+    <div
+      class="relative overflow-hidden rounded-[2rem] border border-emerald-500/25 bg-gradient-to-br from-zinc-950 via-emerald-950/20 to-black p-7 sm:p-10 md:p-14"
+    >
       <div class="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full bg-emerald-500/15 blur-3xl" aria-hidden="true"></div>
       <div class="pointer-events-none absolute -bottom-24 -left-16 h-72 w-72 rounded-full bg-emerald-600/10 blur-3xl" aria-hidden="true"></div>
 
@@ -22,47 +25,56 @@ const year = new Date().getFullYear();
           <p class="mb-3 text-xs font-black uppercase tracking-[3px] text-emerald-400">
             Domain acquisition
           </p>
-          <h2 class="font-display text-4xl tracking-tight md:text-5xl text-white">
+          <h2 class="font-display text-2xl sm:text-3xl md:text-5xl tracking-tight text-white">
             {SITE.name} is available for acquisition
           </h2>
-          <p class="mt-5 max-w-xl text-lg text-zinc-400">
-            Serious buyers and strategic acquirers: connect directly for confidential terms,
+          <p class="mt-5 max-w-xl text-lg text-zinc-300">
+            Listed at <strong class="text-white tabular-nums">{DOMAIN_PRICE.display} USD</strong>.
+            Serious buyers and strategic acquirers connect directly for confidential terms,
             transfer logistics, and flexible closing options. One premium asset. One point of contact.
           </p>
           <p class="mt-6 font-mono text-sm text-emerald-300">
-            <a href={ACQUISITION_MAILTO} class="hover:text-white transition-colors no-underline">
+            <a
+              href={ACQUISITION_MAILTO}
+              class="inline-block py-3 hover:text-white transition-colors no-underline break-all"
+            >
               {SITE.acquisitionEmail}
             </a>
           </p>
         </div>
 
         <div class="flex flex-col gap-4 sm:flex-row lg:flex-col xl:flex-row">
-          <AcquisitionCTA label="Request acquisition terms" variant="accent" class="w-full" icon="fa-envelope" />
+          <AcquisitionCTA label="Request acquisition terms" variant="accent" class="w-full" icon="envelope" />
           <a
-            href={ACQUISITION_MAILTO}
-            class="inline-flex w-full items-center justify-center gap-2 rounded-3xl border border-white/20 px-8 py-4 text-sm font-semibold text-zinc-300 transition hover:border-white/50 hover:text-white no-underline"
+            href="#offer"
+            class="inline-flex w-full items-center justify-center gap-2 rounded-3xl border border-white/20 px-8 py-4 text-sm font-semibold text-zinc-200 transition hover:border-white/50 hover:text-white no-underline"
           >
-            <i class="fas fa-shield-halved text-emerald-400" aria-hidden="true"></i>
-            Escrow-ready • Direct response
+            <Icon name="shield-halved" class="w-4 h-4 text-emerald-400" />
+            Escrow-ready • Make an offer
           </a>
         </div>
       </div>
     </div>
 
     <!-- Disclaimer -->
-    <p class="mx-auto mt-12 max-w-4xl text-center text-xs leading-relaxed text-zinc-500">
+    <p class="mx-auto mt-12 max-w-4xl text-center text-xs leading-relaxed text-zinc-400">
       {disclaimer}
     </p>
 
     <!-- Footer Bottom -->
-    <div class="mt-10 flex flex-col items-center justify-between gap-4 border-t border-white/10 pt-8 text-xs text-zinc-500 md:flex-row">
+    <div
+      class="mt-10 flex flex-col items-center justify-between gap-4 border-t border-white/10 pt-8 text-xs text-zinc-400 md:flex-row"
+    >
       <div>&copy; {year} {SITE.name} — Premium Domain Asset</div>
-      <div class="flex gap-x-6">
-        <a href="/" class="hover:text-zinc-300 no-underline">Home</a>
-        <a href={ACQUISITION_MAILTO} class="hover:text-zinc-300 no-underline">Contact for Acquisition</a>
-      </div>
-      <div class="text-[10px] uppercase tracking-wider text-zinc-600">
-        Demonstration &amp; informational • Updated {SITE.updated}
+      <nav class="flex flex-wrap justify-center gap-x-6 gap-y-1" aria-label="Footer">
+        <a href="/" class="inline-block py-3 hover:text-white no-underline">Home</a>
+        <a href="#meaning" class="inline-block py-3 hover:text-white no-underline">The Name</a>
+        <a href="#why-premium" class="inline-block py-3 hover:text-white no-underline">Why Premium</a>
+        <a href="#faq" class="inline-block py-3 hover:text-white no-underline">FAQ</a>
+        <a href="#offer" class="inline-block py-3 hover:text-white no-underline">Make an Offer</a>
+      </nav>
+      <div class="text-xs uppercase tracking-wider text-zinc-400">
+        Escrow-protected • Updated {SITE.updated}
       </div>
     </div>
   </div>

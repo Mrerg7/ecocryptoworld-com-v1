@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap');
+@import './fonts.css';
 
 @tailwind base;
 @tailwind components;
@@ -12,11 +12,44 @@
 
   html {
     scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
   }
 
   body {
     @apply bg-zinc-950 text-zinc-200 antialiased;
     font-family: 'Inter', system-ui, sans-serif;
+  }
+
+  /* Long tokens (domain names, emails) must never force horizontal scroll. */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5 {
+    overflow-wrap: anywhere;
+  }
+
+  summary::-webkit-details-marker {
+    display: none;
+  }
+
+  :focus-visible {
+    outline: 2px solid #34d399;
+    outline-offset: 2px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
   }
 }
 
@@ -29,6 +62,7 @@
 
   .section-header {
     @apply text-[2.25rem] sm:text-[2.75rem] md:text-[3.25rem] leading-[1.05] font-bold tracking-[-0.03em] sm:tracking-[-0.04em];
+    overflow-wrap: anywhere;
   }
 
   .eco-gradient {

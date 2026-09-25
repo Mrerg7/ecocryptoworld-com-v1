@@ -1,0 +1,172 @@
+---
+import { DOMAIN_PRICE, SITE } from '../consts';
+import Icon from './Icon.astro';
+---
+
+<section id="offer" class="bg-zinc-900 border-y border-zinc-800 py-16 md:py-20">
+  <div class="max-w-screen-xl mx-auto px-6">
+    <div class="grid lg:grid-cols-[1fr_1.1fr] gap-10 lg:gap-14 items-start">
+      <div>
+        <div
+          class="inline-block px-4 py-1 rounded-3xl bg-emerald-500/10 text-emerald-400 text-xs font-bold tracking-[2px] mb-6"
+        >
+          MAKE AN OFFER
+        </div>
+        <h2 class="section-header tracking-[-2.5px] mb-5">
+          Put a number<br />
+          <span class="eco-gradient">in front of the owner.</span>
+        </h2>
+        <p class="text-lg text-zinc-400 leading-relaxed max-w-lg">
+          Listed at <strong class="text-white tabular-nums">{DOMAIN_PRICE.display} USD</strong>.
+          Serious offers are reviewed personally and answered with concrete terms — escrow
+          provider, transfer method, and timeline.
+        </p>
+
+        <dl class="mt-8 space-y-4 text-sm max-w-lg">
+          <div class="flex gap-x-4">
+            <dt class="w-28 shrink-0 text-zinc-400">Seller</dt>
+            <dd class="text-zinc-300">Owner-operated — no brokers, no marketplace fees</dd>
+          </div>
+          <div class="flex gap-x-4">
+            <dt class="w-28 shrink-0 text-zinc-400">Closing</dt>
+            <dd class="text-zinc-300">Escrow.com (or your preferred escrow provider)</dd>
+          </div>
+          <div class="flex gap-x-4">
+            <dt class="w-28 shrink-0 text-zinc-400">Transfer</dt>
+            <dd class="text-zinc-300">Registrar push or inbound transfer, DNS control included</dd>
+          </div>
+          <div class="flex gap-x-4">
+            <dt class="w-28 shrink-0 text-zinc-400">Contact</dt>
+            <dd>
+              <a
+                href={`mailto:${SITE.acquisitionEmail}`}
+                class="inline-block py-3 text-emerald-400 hover:text-emerald-300 underline underline-offset-4 break-all"
+              >
+                {SITE.acquisitionEmail}
+              </a>
+            </dd>
+          </div>
+        </dl>
+      </div>
+
+      <div
+        class="bg-zinc-950 border border-zinc-700 rounded-3xl p-6 sm:p-9 shadow-2xl shadow-black/40"
+      >
+        <form id="offer-form" class="space-y-5">
+          <div class="grid sm:grid-cols-2 gap-5">
+            <div>
+              <label for="offer-name" class="block text-sm font-medium text-zinc-300 mb-2">
+                Your name <span class="text-emerald-400" aria-hidden="true">*</span>
+              </label>
+              <input
+                type="text"
+                id="offer-name"
+                name="name"
+                required
+                autocomplete="name"
+                placeholder="Jane Founder"
+                class="w-full rounded-2xl bg-zinc-900 border border-zinc-700 px-4 py-3.5 text-base text-white placeholder:text-zinc-500 focus:outline-none focus:border-emerald-400 focus:ring-2 focus:ring-emerald-500/30"
+              />
+            </div>
+            <div>
+              <label for="offer-email" class="block text-sm font-medium text-zinc-300 mb-2">
+                Email <span class="text-emerald-400" aria-hidden="true">*</span>
+              </label>
+              <input
+                type="email"
+                id="offer-email"
+                name="email"
+                required
+                autocomplete="email"
+                inputmode="email"
+                placeholder="you@company.com"
+                class="w-full rounded-2xl bg-zinc-900 border border-zinc-700 px-4 py-3.5 text-base text-white placeholder:text-zinc-500 focus:outline-none focus:border-emerald-400 focus:ring-2 focus:ring-emerald-500/30"
+              />
+            </div>
+          </div>
+
+          <div>
+            <label for="offer-amount" class="block text-sm font-medium text-zinc-300 mb-2">
+              Your offer <span class="text-zinc-400 font-normal">(USD)</span>
+            </label>
+            <div class="relative">
+              <span
+                class="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-400 pointer-events-none"
+                aria-hidden="true">$</span
+              >
+              <input
+                type="text"
+                id="offer-amount"
+                name="offer"
+                inputmode="decimal"
+                autocomplete="off"
+                placeholder="25,000"
+                class="w-full rounded-2xl bg-zinc-900 border border-zinc-700 pl-8 pr-4 py-3.5 text-base text-white placeholder:text-zinc-500 focus:outline-none focus:border-emerald-400 focus:ring-2 focus:ring-emerald-500/30"
+              />
+            </div>
+          </div>
+
+          <div>
+            <label for="offer-message" class="block text-sm font-medium text-zinc-300 mb-2">
+              What are you building?
+            </label>
+            <textarea
+              id="offer-message"
+              name="message"
+              rows="4"
+              placeholder="A short note on your project, timeline, and preferred closing method."
+              class="w-full rounded-2xl bg-zinc-900 border border-zinc-700 px-4 py-3.5 text-base text-white placeholder:text-zinc-500 focus:outline-none focus:border-emerald-400 focus:ring-2 focus:ring-emerald-500/30 resize-y"
+            ></textarea>
+          </div>
+
+          <button
+            type="submit"
+            class="w-full inline-flex items-center justify-center gap-x-3 px-8 py-4 rounded-3xl font-semibold text-lg eco-glow text-zinc-950 shadow-xl shadow-emerald-500/25 hover:brightness-110 active:brightness-95 transition-all"
+          >
+            <span>Send acquisition inquiry</span>
+            <Icon name="arrow-right" class="w-[1em] h-[1em]" />
+          </button>
+
+          <p class="text-xs text-zinc-400 leading-relaxed">
+            Submitting opens your email app with a pre-filled message to {SITE.acquisitionEmail}.
+            Nothing is stored or sent to a third party.
+          </p>
+
+          <p
+            id="offer-status"
+            role="status"
+            aria-live="polite"
+            class="text-sm text-emerald-400 hidden"
+          >
+          </p>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { buildInquiryMailto, SITE } from '../consts';
+
+  const form = document.getElementById('offer-form') as HTMLFormElement | null;
+  const status = document.getElementById('offer-status');
+
+  form?.addEventListener('submit', (event) => {
+    event.preventDefault();
+    if (!form.reportValidity()) return;
+
+    const data = new FormData(form);
+    const name = String(data.get('name') ?? '').trim();
+    const email = String(data.get('email') ?? '').trim();
+    const offer = String(data.get('offer') ?? '').trim();
+    const message = String(data.get('message') ?? '').trim();
+
+    const mailto = buildInquiryMailto({ name, email, offer, message });
+
+    if (status) {
+      status.textContent = `Opening your email app… if nothing happens, write to ${SITE.acquisitionEmail}`;
+      status.classList.remove('hidden');
+    }
+    window.location.href = mailto;
+  });
+</script>

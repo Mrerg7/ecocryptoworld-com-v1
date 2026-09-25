@@ -7,7 +7,9 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "deploy": "wrangler deploy"
+    "astro": "astro",
+    "deploy": "wrangler deploy",
+    "check:mobile": "node scripts/mobile-check.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.6.0",

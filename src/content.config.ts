@@ -12,6 +12,12 @@ const site = defineCollection({
         description: z.string(),
       }),
     ),
+    faqs: z.array(
+      z.object({
+        question: z.string(),
+        answer: z.string(),
+      }),
+    ),
   }),
 });
 

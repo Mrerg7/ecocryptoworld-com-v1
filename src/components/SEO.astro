@@ -1,5 +1,6 @@
 ---
-import { SITE } from '../consts';
+import { getEntry } from 'astro:content';
+import { DOMAIN_PRICE, SITE } from '../consts';
 import { getCanonicalUrl } from '../lib/canonical';
 
 interface Props {
@@ -18,14 +19,21 @@ const canonical = getCanonicalUrl(path);
 
 const OG_IMAGE = 'https://imagedelivery.net/-sPAUAWeA405NiWJ0SNIQA/d7753631-936b-4121-4c3f-fa95f9393600/public';
 
-const jsonLd = [
+const siteEntry = await getEntry('site', 'default');
+const faqs = siteEntry?.data.faqs ?? [];
+
+const jsonLd: Record<string, unknown>[] = [
   {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
     name: SITE.name,
+    alternateName: 'Eco Crypto World',
     url: SITE.url,
     description,
     inLanguage: 'en-US',
+    publisher: {
+      '@id': `${SITE.url}#organization`,
+    },
   },
   {
     '@context': 'https://schema.org',
@@ -36,13 +44,13 @@ const jsonLd = [
     category: 'Domain Name',
     brand: {
       '@type': 'Brand',
-      name: SITE.name,
+      name: 'Eco Crypto World',
     },
     offers: {
       '@type': 'Offer',
       url: SITE.url,
-      price: '27500.00',
-      priceCurrency: 'USD',
+      price: DOMAIN_PRICE.amount,
+      priceCurrency: DOMAIN_PRICE.currency,
       availability: 'https://schema.org/InStock',
       validFrom: '2025-01-01T00:00:00-08:00',
       priceValidUntil: '2027-12-31T23:59:59-08:00',
@@ -63,7 +71,7 @@ const jsonLd = [
         shippingRate: {
           '@type': 'MonetaryAmount',
           value: 0,
-          currency: 'USD',
+          currency: DOMAIN_PRICE.currency,
         },
         deliveryTime: {
           '@type': 'ShippingDeliveryTime',
@@ -86,27 +94,14 @@ const jsonLd = [
         },
       },
     },
-    aggregateRating: {
-      '@type': 'AggregateRating',
-      ratingValue: 5,
-      bestRating: 5,
-      reviewCount: 1,
-    },
-    review: {
-      '@type': 'Review',
-      author: {
-        '@type': 'Organization',
-        name: SITE.name,
-      },
-      reviewBody:
-        'Premium domain at the convergence of cryptocurrency, sustainability, and regenerative finance — the definitive brand for the Eco Crypto World movement.',
-    },
     image: OG_IMAGE,
   },
   {
     '@context': 'https://schema.org',
     '@type': 'Organization',
+    '@id': `${SITE.url}#organization`,
     name: SITE.name,
+    alternateName: 'Eco Crypto World',
     url: SITE.url,
     logo: OG_IMAGE,
     contactPoint: {
@@ -117,6 +112,21 @@ const jsonLd = [
     },
   },
 ];
+
+if (faqs.length > 0 && path === '/') {
+  jsonLd.push({
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map((faq) => ({
+      '@type': 'Question',
+      name: faq.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: faq.answer,
+      },
+    })),
+  });
+}
 ---
 
 <meta charset="UTF-8" />
@@ -124,9 +134,13 @@ const jsonLd = [
 <link rel="canonical" href={canonical} />
 <title>{title}</title>
 <meta name="description" content={description} />
-<meta name="robots" content="index, follow" />
+<meta
+  name="robots"
+  content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"
+/>
 <meta name="theme-color" content="#09090b" />
 <meta name="google-site-verification" content="F5DW1RsF6P0F4EHRP_Eu7CB3AhDpymRxkmLFnW8NLlQ" />
+<meta name="author" content="Desert Rich" />
 
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content={SITE.name} />
@@ -147,11 +161,7 @@ const jsonLd = [
 <meta name="twitter:image:alt" content={`${SITE.name} — Premium domain for the Eco Crypto World movement`} />
 
 <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-<link
-  rel="stylesheet"
-  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-  crossorigin="anonymous"
-  referrerpolicy="no-referrer"
-/>
+
+<link rel="preconnect" href="https://imagedelivery.net" />
 
 <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
